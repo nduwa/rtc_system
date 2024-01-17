@@ -28,62 +28,62 @@ $data  = $obj->getUsers();
                      
                      <div class="clearfix"></div>
                    </div>
-                   <div class="x_content">
-                   <table id="datatable-keytable" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Created At</th>
-                        <th>Name</th>
-                        <th>Name User</th>
-                        <th>Email</th>
-                        <th>username</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                      if (isset($_SESSION['reg_msg'])) {
-                        echo $_SESSION['reg_msg'];
-                        unset($_SESSION['reg_msg']);
-                      }
-                       $n = 1;
-                        foreach($data as $row) {
-                          if ($row["status"] == '0') { 
-                            $status = "OFF"; 
-                            $user_status_view = "fa-toggle-off "; 
-                            $st = "color: red;";
-                            $user_ = 1; 
-                        }
-                          else { 
-                            $status = "ON"; 
-                            $user_status_view = "fa-toggle-on";
-                            $st = "color: green;";
-                            $user_ = 0; 
+                   <div class="x_content table-responsive">
+                    <table id="datatable-keytable" class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>Created At</th>
+                              <th>Name</th>
+                              <th>Name User</th>
+                              <th>Email</th>
+                              <th>username</th>
+                              <th>ACTION</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <?php 
+                            if (isset($_SESSION['reg_msg'])) {
+                              echo $_SESSION['reg_msg'];
+                              unset($_SESSION['reg_msg']);
                             }
-                    ?>
-                    <tr>
-                        <td><?php echo $n; ?></td>
-                        <td><?php echo $row["created_at"]; ?></td>
-                        <td><?php echo $row["Name"]; ?></td>
-                        <td><?php echo $row["Name_User"]; ?></td>
-                        <td><?php echo $row["Email"]; ?></td>
-                        <td><?php echo $row["Role"]; ?></td>
-                        <td>
-                        <a href="../router/action_page.php?user_status&status=<?php echo $user_; ?>&&user_ID=<?php echo $row["id"]; ?>" class="btn-sm btn btn-default">
-                                      <i class="fa <?php echo $user_status_view; ?>" style="<?php echo $st; ?>"> <?php echo $status; ?></i> 
-                                  </a>
-                          <?php if($row["status"] == '1'){ ?>
-                          <a href="user_access?id=<?php echo $row['id']; ?>" class="btn-sm btn btn-info">
-                            <i class="fa fa-gears"></i> Privilege
-                          </a>
-                          
-                          <?php } ?>
-                        </td>
-                    </tr>
-                    <?php $n++; } ?>
-                </tbody>
-            </table>
+                            $n = 1;
+                              foreach($data as $row) {
+                                if ($row["status"] == '0') { 
+                                  $status = "OFF"; 
+                                  $user_status_view = "fa-toggle-off "; 
+                                  $st = "color: red;";
+                                  $user_ = 1; 
+                              }
+                                else { 
+                                  $status = "ON"; 
+                                  $user_status_view = "fa-toggle-on";
+                                  $st = "color: green;";
+                                  $user_ = 0; 
+                                  }
+                          ?>
+                          <tr>
+                              <td><?php echo $n; ?></td>
+                              <td><?php echo $row["created_at"]; ?></td>
+                              <td><?php echo $row["Name"]; ?></td>
+                              <td><?php echo $row["Name_User"]; ?></td>
+                              <td><?php echo $row["Email"]; ?></td>
+                              <td><?php echo $row["Role"]; ?></td>
+                              <td>
+                              <a href="../router/action_page.php?user_status&status=<?php echo $user_; ?>&&user_ID=<?php echo $row["id"]; ?>" class="btn-sm btn btn-default">
+                                            <i class="fa <?php echo $user_status_view; ?>" style="<?php echo $st; ?>"> <?php echo $status; ?></i> 
+                                        </a>
+                                <?php if($row["status"] == '1'){ ?>
+                                <a href="user_access?id=<?php echo $row['id']; ?>" class="btn-sm btn btn-info">
+                                  <i class="fa fa-gears"></i> Privilege
+                                </a>
+                                
+                                <?php } ?>
+                              </td>
+                          </tr>
+                          <?php $n++; } ?>
+                      </tbody>
+                    </table>
                    </div>
                  </div>
                </div>

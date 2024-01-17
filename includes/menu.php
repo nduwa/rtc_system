@@ -32,13 +32,16 @@ if(time() - $_SESSION['last_time'] < 3600){
             <div class="menu_section">
               
               <ul class="nav side-menu">
-                  <li><a href="home.php"><i class="fa fa-home"></i> DASHBOARD <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="home"><i class="fa fa-home"></i> DASHBOARD <span class="fa fa-chevron-down"></span></a>
                   </li>
                   <?php  if($rows['inspection'] == 1){ ?>
                     <li><a><i class="fa fa-cog"></i>INSPECTIONS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <?php  if($rows['farmer_inspection'] == 1){ ?>
                       <li><a href="rtc_stations">Update Farmer Trees</a></li>
+                      <?php }   if($rows['registers'] == 1){ ?>
+                      <li><a href="registered_farmers">Registered Farmers</a></li>
+                      <li><a href="collected_gps">Farm GPS</a></li>
                       <?php } ?>
                     </ul>
                   </li>

@@ -52,6 +52,44 @@ class Display extends Dbh {
         }
     }
     #####################################################################################
+                # function of display the station of rtc
+    #####################################################################################
+
+    public function displayedRegisteredFarmers(){
+        if(($_SESSION['staff_Role'] == 'Washing Station Accountant') || ($_SESSION['staff_Role'] == 'Washing Station Manager') || ($_SESSION['staff_Role'] == 'Field Officer') || ($_SESSION['staff_Role'] == '	Site Collector')){
+            $sql_farmers = $this->conn->query("SELECT * FROM `rtc_field_farmers`
+            WHERE _kf_Station = '$_SESSION[_kf_Station]' AND _kf_Supplier = '$_SESSION[_kf_Supplier]'");
+        }else{
+            $sql_farmers = $this->conn->query("SELECT * FROM `rtc_field_farmers`");
+        }
+        $farmer_count  = $sql_farmers->num_rows;
+        if($farmer_count > 0){
+            while($row = $sql_farmers->fetch_assoc()){
+                $farmers_data[] = $row;
+            }
+            return $farmers_data;
+        }
+    }
+    #####################################################################################
+                # function of display the farm gps of rtc
+    #####################################################################################
+
+    public function displayed_GPS_Farm(){
+        if(($_SESSION['staff_Role'] == 'Washing Station Accountant') || ($_SESSION['staff_Role'] == 'Washing Station Manager') || ($_SESSION['staff_Role'] == 'Field Officer') || ($_SESSION['staff_Role'] == '	Site Collector')){
+            $sql_gps = $this->conn->query("SELECT * FROM `rtc_farm_coordinations`
+            WHERE _kf_Station = '$_SESSION[_kf_Station]' AND _kf_Supplier = '$_SESSION[_kf_Supplier]'");
+        }else{
+            $sql_gps = $this->conn->query("SELECT * FROM `rtc_farm_coordinations`");
+        }
+        $gps_count  = $sql_gps->num_rows;
+        if($gps_count > 0){
+            while($row = $sql_gps->fetch_assoc()){
+                $gps_data[] = $row;
+            }
+            return $gps_data;
+        }
+    }
+    #####################################################################################
                 # function of display rtc module is just menu and submenu
     #####################################################################################
 
@@ -70,5 +108,69 @@ class Display extends Dbh {
             return $module_data;
         }
     }
-    
+    #####################################################################################
+                # function of removing farmer trees record
+    #####################################################################################
+
+    public function removeTrees($id){
+        
+        $sql_delete = "DELETE FROM `rtc_household_trees` WHERE `rtc_household_trees`.`ID` = $id";
+        $result_delete = $this->conn->query($sql_delete);
+        if($result_delete){
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href = "../views/rtc_stations";
+                }, 0);
+            </script>';
+        }
+    }
+
+    #####################################################################################
+                # function of removing farmer trees record
+    #####################################################################################
+
+    public function removeFarmerInfo($id){
+        
+        $sql_delete = "DELETE FROM `rtc_field_farmers` WHERE `rtc_field_farmers`.`id` = $id";
+        $result_delete = $this->conn->query($sql_delete);
+        if($result_delete){
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href = "../views/registered_farmers";
+                }, 0);
+            </script>';
+        }
+    }
+    #####################################################################################
+                # function of removing farm gps record
+    #####################################################################################
+
+    public function removeFarm_GPS_Info($id){
+        
+        $sql_delete = "DELETE FROM `rtc_farm_coordinates` WHERE `rtc_farm_coordinates`.`id` = $id";
+        $result_delete = $this->conn->query($sql_delete);
+        if($result_delete){
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href = "../views/collected_gps";
+                }, 0);
+            </script>';
+        }
+    }
+    #####################################################################################
+                # function of removing farmer trees record
+    #####################################################################################
+
+    public function remove_Weekly_Report($id){
+        
+        $sql_delete = "DELETE FROM `rtc_field_weekly_report` WHERE `rtc_field_weekly_report`.`ID` = $id";
+        $result_delete = $this->conn->query($sql_delete);
+        if($result_delete){
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href = "../views/rtc_weekly_report";
+                }, 0);
+            </script>';
+        }
+    }
 } 

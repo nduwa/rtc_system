@@ -91,7 +91,9 @@ class Model extends Dbh {
         $kf_Supplier            =  $_POST['kf_Supplier'];
         $farmer_ID              =  $_POST['farmer_ID'];
         $farmer_name            =  $_POST['farmer_name'];
-        $national_ID            =  $_POST['national_ID'];
+        $dot                    =  "'";
+        $national               =  $_POST['national_ID'];
+        $national_ID            =  mysqli_real_escape_string($dot.$national);
         $group_ID               =  $_POST['group_ID'];
         $received_seedling      =  $_POST['received_seedling'];
         $survived_seedling      =  $_POST['survived_seedling'];
@@ -102,25 +104,33 @@ class Model extends Dbh {
         $nitrogen               =  $_POST['nitrogen'];
         $natural_shade          =  $_POST['natural_shade'];
         $shade_trees            =  $_POST['shade_trees'];
-        $result = $this->conn->query("INSERT INTO `rtc_household_trees`(ID,full_name,_kf_Staff,
-        _kf_User,_kf_Station,_kf_Supplier,CW_Name,Group_ID,farmer_ID,farmer_name,national_ID,
-        received_seedling,survived_seedling,planted_year,old_trees,old_trees_planted_year,
-        coffee_plot,nitrogen,natural_shade,shade_trees,created_at) VALUES (null,'$full_name','$kp_Staff',
-        '$kp_User','$kf_Station','$kf_Supplier','$CW_Name','$group_ID','$farmer_ID','$farmer_name',
-        '$national_ID','$received_seedling','$survived_seedling','$planted_year','$old_trees',
-        '$old_trees_planted_year','$coffee_plot','$nitrogen','$natural_shade','$shade_trees',now())");
-        if($result){
+        if($kp_User == ''){
             $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>The data have been inserted successfully!!!!</strong>
-            </div>';
-            $url = "../views/update_trees.php?msg=&done";
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong style="color:red;">Please Logout and Login again before sending....</strong>
+                </div>';
+                $url = "../views/update_trees.php?msg=&error";
         }else{
-            $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>The data not yet inserted!!!!</strong>
-            </div>';
-            $url = "../views/update_trees.php?msg=&error";
+            $result = $this->conn->query("INSERT INTO `rtc_household_trees`(ID,full_name,_kf_Staff,
+            _kf_User,_kf_Station,_kf_Supplier,CW_Name,Group_ID,farmer_ID,farmer_name,national_ID,
+            received_seedling,survived_seedling,planted_year,old_trees,old_trees_planted_year,
+            coffee_plot,nitrogen,natural_shade,shade_trees,created_at) VALUES (null,'$full_name','$kp_Staff',
+            '$kp_User','$kf_Station','$kf_Supplier','$CW_Name','$group_ID','$farmer_ID','$farmer_name',
+            '$national_ID','$received_seedling','$survived_seedling','$planted_year','$old_trees',
+            '$old_trees_planted_year','$coffee_plot','$nitrogen','$natural_shade','$shade_trees',now())");
+            if($result){
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The data have been inserted successfully!!!!</strong>
+                </div>';
+                $url = "../views/update_trees.php?msg=&done";
+            }else{
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The data not yet inserted!!!!</strong>
+                </div>';
+                $url = "../views/update_trees.php?msg=&error";
+            }
         }
         header('location: '.$url);
     }
@@ -144,24 +154,138 @@ class Model extends Dbh {
         $farm_inspected     =  $_POST['farm_inspected'];
         $planned_inspected  =  $_POST['planned_inspected'];
         $comments           =  $_POST['comments'];
-        $result = $this->conn->query("INSERT INTO `rtc_field_weekly_report`(ID,_kf_Staff,_kf_User,
-        _kf_Station,_kf_Supplier,CW_Name,full_name,user_code,trained_number,men_attended,women_attended,
-        planned_groups,farm_inspected,planned_inspected,comments,createdAt) VALUES(null,'$kp_Staff',
-        '$kp_User','$kf_Station','$kf_Supplier','$CW_Name','$full_name','$user_code','$trained_number',
-        '$men_attended','$women_attended','$planned_groups','$farm_inspected','$planned_inspected',
-        '$comments',now())");
-        if($result){
+        if($kp_User == ''){
             $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>The data have been inserted successfully!!!!</strong>
-            </div>';
-            $url = "../views/weekly_report.php?msg=&done";
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong style="color:red;">Please Logout and Login again before sending....</strong>
+                </div>';
+                $url = "../views/weekly_report.php?msg=&error";
         }else{
+            $result = $this->conn->query("INSERT INTO `rtc_field_weekly_report`(ID,_kf_Staff,_kf_User,
+            _kf_Station,_kf_Supplier,CW_Name,full_name,user_code,trained_number,men_attended,women_attended,
+            planned_groups,farm_inspected,planned_inspected,comments,createdAt) VALUES(null,'$kp_Staff',
+            '$kp_User','$kf_Station','$kf_Supplier','$CW_Name','$full_name','$user_code','$trained_number',
+            '$men_attended','$women_attended','$planned_groups','$farm_inspected','$planned_inspected',
+            '$comments',now())");
+            if($result){
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The data have been inserted successfully!!!!</strong>
+                </div>';
+                $url = "../views/weekly_report.php?msg=&done";
+            }else{
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The data not yet inserted!!!!</strong>
+                </div>';
+                $url = "../views/weekly_report.php?msg=&error";
+            }
+        }
+        header('location: '.$url);
+    }
+    #####################################################################################
+                # function of save the farmer in registration
+    #####################################################################################
+    public function Farmer_Registration($post){
+        //echo "well";
+        $kf_Supplier        =  $_POST['kf_Supplier'];
+        $kp_Staff           =  $_POST['kp_Staff'];
+        $kp_User            =  $_POST['kp_User'];
+        $user_code          =  $_POST['user_code'];
+        $kf_Station         =  $_POST['kf_Station'];
+        $CW_Name            =  $_POST['CW_Name'];
+        $farmer_name        =  $_POST['farmer_name'];
+        $gender             =  $_POST['gender'];
+        $Year_Birth         =  $_POST['Year_Birth'];
+        $dot                =  "'";
+        $ph                 =  $dot.$_POST['phone'];
+        $phone              =  mysqli_real_escape_string($this->conn, $ph);
+        $id_                =  $dot.$_POST['id_number'];
+        $id_number          =  mysqli_real_escape_string($this->conn, $id_);
+        $marital_status     =  $_POST['marital_status'];
+        $Group_ID           =  $_POST['Group_ID'];
+        $village            =  $_POST['village'];
+        $cell               =  $_POST['cell'];
+        $sector             =  $_POST['sector'];
+        $trees              =  $_POST['trees'];
+        $productive_trees   =  $_POST['productive_trees'];
+        $plot_number        =  $_POST['plot_number'];
+        $skills             =  $_POST['skills'];
+        $math_skills        =  $_POST['math_skills'];
+        $education_level    =  $_POST['education_level'];
+        $full_name          =  $_POST['full_name'];
+        $plot_gps           =  $_POST['plot_gps'];
+                      
+        if($kp_User == ''){
             $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>The data not yet inserted!!!!</strong>
-            </div>';
-            $url = "../views/weekly_report.php?msg=&error";
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong style="color:red;">Please Logout and Login again before sending....</strong>
+                </div>';
+                $url = "../views/farmer_registration.php?msg=&error";
+        }else{
+            $result = $this->conn->query("INSERT INTO `rtc_field_farmers`(id,_kf_Supplier,_kf_Staff,
+            _kf_User,user_code,_kf_Station,CW_Name,farmer_name,Gender,Year_Birth,phone,National_ID,
+            Marital_Status,Group_ID,village,cell,sector,Trees,Trees_Producing,number_of_plots,Skills,
+            Math_Skills,education_level,created_at,full_name,farm_GPS) VALUES(null,'$kf_Supplier','$kp_Staff',
+            '$kp_User','$user_code','$kf_Station','$CW_Name','$farmer_name','$gender','$Year_Birth','$phone',
+            '$id_number','$marital_status','$Group_ID','$village','$cell','$sector','$trees','$productive_trees'
+            ,'$plot_number','$skills','$math_skills','$education_level',now(),'$full_name','$plot_gps')");
+            if($result){
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The farmer data have been inserted successfully!!!!</strong>
+                </div>';
+                $url = "../views/farmer_registration.php?msg=&done";
+            }else{
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The farmer data not yet inserted!!!!</strong>
+                </div>';
+                $url = "../views/farmer_registration.php?msg=&error";
+            }
+        }
+        header('location: '.$url);
+    }
+    #####################################################################################
+                # function of save the gps farm in registration
+    #####################################################################################
+    public function GPS_Farm_collection($post){
+        //echo "well";
+        $kf_Supplier        =  $_POST['kf_Supplier'];
+        $kp_Staff           =  $_POST['kp_Staff'];
+        $kp_User            =  $_POST['kp_User'];
+        $user_code          =  $_POST['user_code'];
+        $kf_Station         =  $_POST['kf_Station'];
+        $CW_Name            =  $_POST['CW_Name'];
+        $farmer_name        =  $_POST['farmer_name'];
+        $FarmerID           =  $_POST['FarmerID'];
+        $National_ID        =  mysqli_real_escape_string($this->conn, $_POST['National_ID']);
+        $full_name          =  $_POST['full_name'];
+        $plot_gps           =  mysqli_real_escape_string($this->conn, $_POST['plot_gps']);
+                      
+        if($kp_User == ''){
+            $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong style="color:red;">Please Logout and Login again before sending....</strong>
+                </div>';
+                $url = "../views/gps_collection.php?msg=&error";
+        }else{
+            $result = $this->conn->query("INSERT INTO `rtc_farm_coordinations`(id,_kf_Supplier,_kf_Staff,
+            _kf_User,user_code,_kf_Station,CW_Name,farmer_name,national_ID,farmer_ID,full_name,farm_GPS,created_At) VALUES(null,'$kf_Supplier','$kp_Staff',
+            '$kp_User','$user_code','$kf_Station','$CW_Name','$farmer_name','$National_ID','$FarmerID','$full_name','$plot_gps',now())");
+            if($result){
+                $_SESSION['mess'] = '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The GPS data have been inserted successfully!!!!</strong>
+                </div>';
+                $url = "../views/gps_collection.php?msg=&done";
+            }else{
+                $_SESSION['mess'] = '<div class="alert alert-sanger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>The GPS data not yet inserted!!!!</strong>
+                </div>';
+                $url = "../views/gps_collection.php?msg=&error".$this->conn->error;
+            }
         }
         header('location: '.$url);
     }

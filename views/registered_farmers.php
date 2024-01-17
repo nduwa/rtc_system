@@ -4,7 +4,7 @@ include "../includes/header.php";
 include '../includes/menu.php';
 #####################################################
 $obj  = new Display();
-$station_data  = $obj->displayedStation();
+$farmers_data  = $obj->displayedRegisteredFarmers();
 
 ?>
   <!-- =============================================== -->
@@ -33,45 +33,53 @@ $station_data  = $obj->displayedStation();
                           <tr>
                             <th>Station Name</th>
                             <th>Group ID</th>
-                            <th>Farmer ID</th>
                             <th>Farmer Name</th>
+                            <th>Gender</th>
+                            <th>Year Birth</th>
+                            <th>Phone</th>
                             <th>National ID</th>
-                            <th>Received Seedling</th>
-                            <th>Survived Seedling</th>
-                            <th>Planted Year</th>
-                            <th>Old Trees</th>
-                            <th>Old Trees Planted Year</th>
-                            <th>Coffee Plot</th>
-                            <th>Nitrogen</th>
-                            <th>Natural Shade</th>
-                            <th>Shade Trees</th>
+                            <th>Marital Status</th>
+                            <th>Village</th>
+                            <th>Cell</th>
+                            <th>Sector</th>
+                            <th>Trees</th>
+                            <th>Producing Trees</th>
+                            <th>Plot number</th>
+                            <th>Skills</th>
+                            <th>Math Skills</th>
+                            <th>Education Level</th>
                             <th>Date</th>
                             <th>Collector</th>
+                            <th>GPS</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                             <?php 
-                                foreach($station_data as $row) {  
+                                foreach($farmers_data as $row) {  
                             ?>
                             <tr>
                                 <td><?php echo $row["CW_Name"]; ?></td>
                                 <td><?php echo $row["Group_ID"]; ?></td>
-                                <td><?php echo $row["farmer_ID"]; ?></td>
                                 <td><?php echo $row["farmer_name"]; ?></td>
-                                <td><?php echo $row["national_ID"]; ?></td>
-                                <td><?php echo $row["received_seedling"]; ?></td>
-                                <td><?php echo $row["survived_seedling"]; ?></td>
-                                <td><?php echo $row["planted_year"]; ?></td>
-                                <td><?php echo $row["old_trees"]; ?></td>
-                                <td><?php echo $row["old_trees_planted_year"]; ?></td>
-                                <td><?php echo $row["coffee_plot"]; ?></td>
-                                <td><?php echo $row["nitrogen"]; ?></td>
-                                <td><?php echo $row["natural_shade"]; ?></td>
-                                <td><?php echo $row["shade_trees"]; ?></td>
+                                <td><?php echo $row["Gender"]; ?></td>
+                                <td><?php echo $row["Year_Birth"]; ?></td>
+                                <td><?php echo $row["phone"]; ?></td>
+                                <td><?php echo $row["National_ID"]; ?></td>
+                                <td><?php echo $row["Marital_Status"]; ?></td>
+                                <td><?php echo $row["village"]; ?></td>
+                                <td><?php echo $row["cell"]; ?></td>
+                                <td><?php echo $row["sector"]; ?></td>
+                                <td><?php echo $row["Trees"]; ?></td>
+                                <td><?php echo $row["Trees_Producing"]; ?></td>
+                                <td><?php echo $row["number_of_plots"]; ?></td>
+                                <td><?php echo $row["Skills"]; ?></td>
+                                <td><?php echo $row["Math_Skills"]; ?></td>
+                                <td><?php echo $row["education_level"]; ?></td>
                                 <td><?php echo $row["created_at"]; ?></td>
                                 <td><?php echo $row["full_name"]; ?></td>
-                                <td><a href="../router/action_page.php?remove_trees_ID=<?php echo $row["ID"]; ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
+                                <td><?php echo $row["farm_GPS"]; ?></td>
+                                <td><a href="../router/action_page.php?remove_farmer_data=<?php echo $row["id"]; ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                             </tr>
                             <?php } ?>
                         </tbody>

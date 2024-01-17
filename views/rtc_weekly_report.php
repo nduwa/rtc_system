@@ -23,7 +23,7 @@ $module_data  = $obj->displayWeeklyReport();
                <div class="col-md-12 col-sm-12 col-xs-12">
                  <div class="x_panel">
                     <div class="x_title">
-                      <h2><i class="fa fa-bars"></i> List of RTC Stations</h2>
+                      <h2><i class="fa fa-bars"></i> List of Field Week report</h2>
                       
                       <div class="clearfix"></div>
                     </div>
@@ -42,6 +42,7 @@ $module_data  = $obj->displayWeeklyReport();
                             <th>Farms Planned to Inspect</th>
                             <th>Other Activities and Comments</th>
                             <th>Date</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -60,6 +61,7 @@ $module_data  = $obj->displayWeeklyReport();
                                 <td><?php echo $row["planned_inspected"]; ?></td>
                                 <td><?php echo $row["comments"]; ?></td>
                                 <td><?php echo $row["createdAt"]; ?></td>
+                                <td><a href="../router/action_page.php?remove_Weekly_Report_ID=<?php echo $row["ID"]; ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                             </tr>
                             <?php } ?>
                         </tbody>

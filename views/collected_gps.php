@@ -4,7 +4,7 @@ include "../includes/header.php";
 include '../includes/menu.php';
 #####################################################
 $obj  = new Display();
-$station_data  = $obj->displayedStation();
+$gps_data  = $obj->displayed_GPS_Farm();
 
 ?>
   <!-- =============================================== -->
@@ -32,46 +32,28 @@ $station_data  = $obj->displayedStation();
                         <thead>
                           <tr>
                             <th>Station Name</th>
-                            <th>Group ID</th>
-                            <th>Farmer ID</th>
                             <th>Farmer Name</th>
                             <th>National ID</th>
-                            <th>Received Seedling</th>
-                            <th>Survived Seedling</th>
-                            <th>Planted Year</th>
-                            <th>Old Trees</th>
-                            <th>Old Trees Planted Year</th>
-                            <th>Coffee Plot</th>
-                            <th>Nitrogen</th>
-                            <th>Natural Shade</th>
-                            <th>Shade Trees</th>
-                            <th>Date</th>
+                            <th>Farmer ID</th>
+                            <th>GPS</th>
                             <th>Collector</th>
+                            <th>Date</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                             <?php 
-                                foreach($station_data as $row) {  
+                                foreach($gps_data as $row) {  
                             ?>
                             <tr>
                                 <td><?php echo $row["CW_Name"]; ?></td>
-                                <td><?php echo $row["Group_ID"]; ?></td>
-                                <td><?php echo $row["farmer_ID"]; ?></td>
                                 <td><?php echo $row["farmer_name"]; ?></td>
                                 <td><?php echo $row["national_ID"]; ?></td>
-                                <td><?php echo $row["received_seedling"]; ?></td>
-                                <td><?php echo $row["survived_seedling"]; ?></td>
-                                <td><?php echo $row["planted_year"]; ?></td>
-                                <td><?php echo $row["old_trees"]; ?></td>
-                                <td><?php echo $row["old_trees_planted_year"]; ?></td>
-                                <td><?php echo $row["coffee_plot"]; ?></td>
-                                <td><?php echo $row["nitrogen"]; ?></td>
-                                <td><?php echo $row["natural_shade"]; ?></td>
-                                <td><?php echo $row["shade_trees"]; ?></td>
-                                <td><?php echo $row["created_at"]; ?></td>
+                                <td><?php echo $row["farmer_ID"]; ?></td>
+                                <td><?php echo $row["farm_GPS"]; ?></td>
                                 <td><?php echo $row["full_name"]; ?></td>
-                                <td><a href="../router/action_page.php?remove_trees_ID=<?php echo $row["ID"]; ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
+                                <td><?php echo $row["created_at"]; ?></td>
+                                <td><a href="../router/action_page.php?remove_gps_data=<?php echo $row["id"]; ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                             </tr>
                             <?php } ?>
                         </tbody>

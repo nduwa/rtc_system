@@ -8,28 +8,20 @@ include "../includes/menu.php";
            
              <!-- top tiles -->
               <div class="row">
-                <div class="" >
-                  <div class="row tile_count">
-                    <div class="row">
-                      <div class=" tile_stats_count" style="text-align:center;margin-left:20px;">
-                        <h1 class="count">Welcome!!!!<br></h1>
-                      </div>
-                    </div><br>
-                    <div class="row" style="text-align:center;margin-left:10px;">
-                      <div class=" tile_stats_count pull-right">
-                        <div class="count">
-                          <a href="update_trees" class="btn btn-lg btn-success">Update Farmer Trees</a>
-                        </div>
-                      </div>
-                      <div class=" tile_stats_count pull-right">
-                        <div class="count">
-                          <a href="weekly_report" class="btn btn-lg btn-success">Weekly Report</a>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                  </div>
+                <div class="col-md-3 text-center">
+                  <h1 class="count">Welcome!!!!<br></h1>
+                </div>
+                <div class="col-md-2">
+                  <a href="update_trees" class="btn btn-md btn-success">Update Farmer Trees</a>
+                </div>
+                <div class="col-md-2">
+                  <a href="weekly_report" class="btn btn-md btn-success">Weekly Report</a>
+                </div>
+                <div class="col-md-2">
+                  <a href="farmer_registration" class="btn btn-md btn-success">Farmer Registration</a>
+                </div>
+                <div class="col-md-2">
+                  <a href="gps_collection" class="btn btn-md btn-success">GPS Collection</a>
                 </div>
               </div>
             
@@ -42,27 +34,35 @@ include "../includes/menu.php";
              <div class="x_panel">
                 <div class="x_title">
                   <h2>Rwanda Trading Company collectional system</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Settings 1</a>
-                          <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
+                  
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
 
                   <div class="bs-example" data-example-id="simple-jumbotron">
                     <div class="jumbotron">
-                      <h1>Hello, world!</h1>
-                      <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                      <h1>QUALITY ASSURANCE</h1>
+                      <p>At Rwanda Trading Co., we believe that
+                        farmer development and investment into the
+                        supply chain infrastructure is fundamental in
+                        producing quality, consistent coffee. 
+                        We have achieved this by creating training programs,
+                        setting standards from farm to final delivery,
+                        invest in owned washing stations and offer
+                        oversight to our partner stations.
+                      </p>
+                      <h1>OUR PRODUCTS</h1>
+                      <p>Through our processes and standards, RTC is
+                        able to offer both naturally processed and
+                        fully-washed coffees - monitoring and quality
+                        checking at every step of the process upon
+                        delivery to our dry mill.
+                        We offer a range of different qualities of
+                        green coffee, catering for micro roasters,
+                        large cafe chains, and traders. We supply
+                        specialty, certified, traceable, and other
+                        commercial quality coffees.
+                      </p>
                     </div>
                   </div>
 
